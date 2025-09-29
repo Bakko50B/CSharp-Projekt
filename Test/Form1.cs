@@ -46,7 +46,6 @@ namespace ColorApp
             trackBarBlue.Value = _currentColor.Blue;
         }
 
-
         private void settextBoxRGBValue()
         {
             textBoxRed.Text = _currentColor.Red.ToString();
@@ -65,12 +64,10 @@ namespace ColorApp
         }
 
 
-
         private void labelGreyScale()
         {
             labelShowGreyscale.Text = _greyColor.ToString();
         }
-
 
         private void UpdatePanelColor()
         {

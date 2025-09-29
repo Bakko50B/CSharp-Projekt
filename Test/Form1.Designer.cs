@@ -252,9 +252,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(12, 406);
             label5.Name = "label5";
-            label5.Size = new Size(277, 25);
+            label5.Size = new Size(279, 25);
             label5.TabIndex = 18;
-            label5.Text = "Slumpa fram komplett Pastellfärg";
+            label5.Text = "Slumpa fram komplett pastellfärg";
             // 
             // button1
             // 
@@ -390,6 +390,7 @@
             Controls.Add(panelGreyscale);
             Controls.Add(panelGruppMedFärgknappar);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             Name = "Form1";
