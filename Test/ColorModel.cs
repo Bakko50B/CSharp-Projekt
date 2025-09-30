@@ -19,7 +19,7 @@ namespace ColorApp
 
         public override string ToString()
         {
-            return $"RGB: {Red}, {Green}, {Blue}";
+            return $"{Red}, {Green}, {Blue}";
         }
     }
 

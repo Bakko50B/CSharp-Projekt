@@ -8,10 +8,13 @@ namespace ColorApp
         private ColorModel _currentColor;
         private ColorModel _greyColor;
         private ColorModel _pastelcolor;
+        private ColorStorage _colorStorage;
 
         public Form1()
         {
             InitializeComponent();
+
+            this.Load += Form1_Load!;
 
             _currentColor = _generator.Generate();
             _greyColor = _greyGenerator.Generate();
@@ -21,12 +24,19 @@ namespace ColorApp
             panelGreyscale.BackColor = _greyColor.ToColor();
             panelPastel.BackColor = _pastelcolor.ToColor();
 
+            _colorStorage = new ColorStorage();
+
             labelColors();
             labelGreyScale();
             labelPastelColor();
             UpdateUI();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            _colorStorage.LoadFromFile("colors.json");
+            UpdateColorThumbnails(); // om du visar färgerna visuellt
+        }
 
         private void UpdateUI()
         {
@@ -78,6 +88,29 @@ namespace ColorApp
         {
             panelPastel.BackColor = _pastelcolor.ToColor();
         }
+
+        private void UpdateColorThumbnails()
+        {
+            flowPanelColors.Controls.Clear();
+
+            foreach (var color in _colorStorage.Colors)
+            {
+                var panel = new Panel
+                {
+                    Width = 40,
+                    Height = 40,
+                    BackColor = color.ToColor(),
+                    Margin = new Padding(5),
+                    Cursor = Cursors.Hand,
+                    Tag = color // spara färgen i Tag för att kunna hämta den vid klick
+                };
+
+                panel.Click += ColorPanel_Click;
+                flowPanelColors.Controls.Add(panel);
+            }
+        }
+
+
 
         private void BtnRed_Click_1(object sender, EventArgs e)
         {
@@ -196,6 +229,39 @@ namespace ColorApp
         private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void buttonSaveRGBColor_Click(object sender, EventArgs e)
+        {
+            _colorStorage.AddColor(_currentColor);
+            _colorStorage.SaveToFile("colors.json");
+            MessageBox.Show($"Färgen {_currentColor} har sparats.");
+            UpdateColorThumbnails();
+
+        }
+
+        private void buttonSavePastellColor_Click(object sender, EventArgs e)
+        {
+            _colorStorage.AddColor(_pastelcolor);
+            _colorStorage.SaveToFile("colors.json");
+            MessageBox.Show($"Färgen {_pastelcolor} har sparats.");
+            UpdateColorThumbnails();
+        }
+
+        private void ColorPanel_Click(object sender, EventArgs e)
+        {
+            if (sender is Panel panel && panel.Tag is ColorModel color)
+            {
+                Clipboard.SetText(color.ToString());
+                MessageBox.Show("Färgkoden är kopierad!", "Kopierat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        } 
+
+        private void redigeraSparadeFärgerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var editColors = new EditColorsForm();
+            editColors.Show();
+
         }
     }
 }

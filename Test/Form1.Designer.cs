@@ -37,6 +37,7 @@
             label2 = new Label();
             labelRGBCode = new Label();
             panelGruppMedFärgknappar = new Panel();
+            buttonSaveRGBColor = new Button();
             label4 = new Label();
             label3 = new Label();
             textBoxBlue = new TextBox();
@@ -58,7 +59,12 @@
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             avslutaToolStripMenuItem = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            redigeraSparadeFärgerToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
+            flowPanelColors = new FlowLayoutPanel();
+            buttonSavePastellColor = new Button();
+            labelSacedColors = new Label();
             panelGruppMedFärgknappar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarBlue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBarGreen).BeginInit();
@@ -152,6 +158,7 @@
             // 
             // panelGruppMedFärgknappar
             // 
+            panelGruppMedFärgknappar.Controls.Add(buttonSaveRGBColor);
             panelGruppMedFärgknappar.Controls.Add(label4);
             panelGruppMedFärgknappar.Controls.Add(label3);
             panelGruppMedFärgknappar.Controls.Add(textBoxBlue);
@@ -173,6 +180,16 @@
             panelGruppMedFärgknappar.Name = "panelGruppMedFärgknappar";
             panelGruppMedFärgknappar.Size = new Size(1139, 305);
             panelGruppMedFärgknappar.TabIndex = 12;
+            // 
+            // buttonSaveRGBColor
+            // 
+            buttonSaveRGBColor.Location = new Point(12, 164);
+            buttonSaveRGBColor.Name = "buttonSaveRGBColor";
+            buttonSaveRGBColor.Size = new Size(238, 34);
+            buttonSaveRGBColor.TabIndex = 17;
+            buttonSaveRGBColor.Text = "Spara färg";
+            buttonSaveRGBColor.UseVisualStyleBackColor = true;
+            buttonSaveRGBColor.Click += buttonSaveRGBColor_Click;
             // 
             // label4
             // 
@@ -288,7 +305,7 @@
             // panelGreyscale
             // 
             panelGreyscale.Anchor = AnchorStyles.Left;
-            panelGreyscale.Location = new Point(721, 621);
+            panelGreyscale.Location = new Point(721, 601);
             panelGreyscale.Name = "panelGreyscale";
             panelGreyscale.Size = new Size(395, 90);
             panelGreyscale.TabIndex = 13;
@@ -297,7 +314,7 @@
             // 
             labelShowGreyscale.Anchor = AnchorStyles.Left;
             labelShowGreyscale.AutoSize = true;
-            labelShowGreyscale.Location = new Point(721, 578);
+            labelShowGreyscale.Location = new Point(721, 558);
             labelShowGreyscale.Margin = new Padding(3, 0, 3, 15);
             labelShowGreyscale.Name = "labelShowGreyscale";
             labelShowGreyscale.Size = new Size(145, 25);
@@ -307,7 +324,7 @@
             // panelPastel
             // 
             panelPastel.Anchor = AnchorStyles.Left;
-            panelPastel.Location = new Point(721, 402);
+            panelPastel.Location = new Point(721, 429);
             panelPastel.Name = "panelPastel";
             panelPastel.Size = new Size(395, 90);
             panelPastel.TabIndex = 5;
@@ -316,7 +333,7 @@
             // 
             labelPastel.Anchor = AnchorStyles.Left;
             labelPastel.AutoSize = true;
-            labelPastel.Location = new Point(721, 359);
+            labelPastel.Location = new Point(721, 386);
             labelPastel.Margin = new Padding(3, 0, 3, 15);
             labelPastel.Name = "labelPastel";
             labelPastel.Size = new Size(112, 25);
@@ -346,7 +363,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, helpToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1139, 33);
@@ -367,17 +384,61 @@
             avslutaToolStripMenuItem.Text = "Avsluta";
             avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
             // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redigeraSparadeFärgerToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(58, 29);
+            editToolStripMenuItem.Text = "Edit";
+            // 
+            // redigeraSparadeFärgerToolStripMenuItem
+            // 
+            redigeraSparadeFärgerToolStripMenuItem.Name = "redigeraSparadeFärgerToolStripMenuItem";
+            redigeraSparadeFärgerToolStripMenuItem.Size = new Size(303, 34);
+            redigeraSparadeFärgerToolStripMenuItem.Text = "Redigera sparade färger";
+            redigeraSparadeFärgerToolStripMenuItem.Click += redigeraSparadeFärgerToolStripMenuItem_Click;
+            // 
             // helpToolStripMenuItem
             // 
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new Size(65, 29);
             helpToolStripMenuItem.Text = "Help";
             // 
+            // flowPanelColors
+            // 
+            flowPanelColors.Location = new Point(12, 751);
+            flowPanelColors.Name = "flowPanelColors";
+            flowPanelColors.Size = new Size(300, 150);
+            flowPanelColors.TabIndex = 20;
+            // 
+            // buttonSavePastellColor
+            // 
+            buttonSavePastellColor.Location = new Point(12, 491);
+            buttonSavePastellColor.Name = "buttonSavePastellColor";
+            buttonSavePastellColor.Size = new Size(238, 34);
+            buttonSavePastellColor.TabIndex = 18;
+            buttonSavePastellColor.Text = "Spara färg";
+            buttonSavePastellColor.UseVisualStyleBackColor = true;
+            buttonSavePastellColor.Click += buttonSavePastellColor_Click;
+            // 
+            // labelSacedColors
+            // 
+            labelSacedColors.AutoSize = true;
+            labelSacedColors.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelSacedColors.Location = new Point(12, 710);
+            labelSacedColors.Name = "labelSacedColors";
+            labelSacedColors.Size = new Size(199, 38);
+            labelSacedColors.TabIndex = 21;
+            labelSacedColors.Text = "Sparade färger";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1139, 739);
+            ClientSize = new Size(1139, 913);
+            Controls.Add(labelSacedColors);
+            Controls.Add(buttonSavePastellColor);
+            Controls.Add(flowPanelColors);
             Controls.Add(label5);
             Controls.Add(button1);
             Controls.Add(lblGråskalefärger);
@@ -439,5 +500,11 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem avslutaToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
+        private Button buttonSaveRGBColor;
+        private FlowLayoutPanel flowPanelColors;
+        private Button buttonSavePastellColor;
+        private Label labelSacedColors;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem redigeraSparadeFärgerToolStripMenuItem;
     }
 }
