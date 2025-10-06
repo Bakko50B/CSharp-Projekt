@@ -1,4 +1,6 @@
 ﻿
+// Klass för att representera en färg med RGB-komponenter och metoder för att konvertera till olika format.
+
 namespace ColorApp
 { 
     public class ColorModel
