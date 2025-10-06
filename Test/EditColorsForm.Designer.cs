@@ -28,12 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "EditColorsForm";
+            flowPanelColorList = new FlowLayoutPanel();
+            btnDeleteSelected = new Button();
+            btnClose = new Button();
+            SuspendLayout();
+            // 
+            // flowPanelColorList
+            // 
+            flowPanelColorList.AutoScroll = true;
+            flowPanelColorList.Dock = DockStyle.Top;
+            flowPanelColorList.FlowDirection = FlowDirection.TopDown;
+            flowPanelColorList.Location = new Point(0, 0);
+            flowPanelColorList.Name = "flowPanelColorList";
+            flowPanelColorList.Size = new Size(800, 385);
+            flowPanelColorList.TabIndex = 0;
+            flowPanelColorList.WrapContents = false;
+            // 
+            // btnDeleteSelected
+            // 
+            btnDeleteSelected.Location = new Point(97, 391);
+            btnDeleteSelected.Name = "btnDeleteSelected";
+            btnDeleteSelected.Size = new Size(216, 47);
+            btnDeleteSelected.TabIndex = 1;
+            btnDeleteSelected.Text = "Radera markerade";
+            btnDeleteSelected.UseVisualStyleBackColor = true;
+            btnDeleteSelected.Click += btnDeleteSelected_Click;
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(442, 391);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(216, 47);
+            btnClose.TabIndex = 2;
+            btnClose.Text = "Stäng";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // EditColorsForm
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 461);
+            Controls.Add(btnClose);
+            Controls.Add(btnDeleteSelected);
+            Controls.Add(flowPanelColorList);
+            Name = "EditColorsForm";
+            Text = "EditColorsForm";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private FlowLayoutPanel flowPanelColorList;
+        private Button btnDeleteSelected;
+        private Button btnClose;
     }
 }

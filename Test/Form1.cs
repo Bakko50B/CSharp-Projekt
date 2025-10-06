@@ -4,17 +4,22 @@ namespace ColorApp
     {
         private IColorGenerator _generator = new RandomColorGenerator();
         private IColorGenerator _greyGenerator = new GrayScaleGenerator();
+        private IColorGenerator _fuzzyGenerator = new FuzzyGrayScaleGenerator();
         private IColorGenerator _pastelGenerator = new PastelColorGenerator();
+        
         private ColorModel _currentColor;
         private ColorModel _greyColor;
         private ColorModel _pastelcolor;
+        
         private ColorStorage _colorStorage;
 
         public Form1()
         {
             InitializeComponent();
+            this.Icon = new Icon("favicon.ico");
 
             this.Load += Form1_Load!;
+
 
             _currentColor = _generator.Generate();
             _greyColor = _greyGenerator.Generate();
@@ -35,7 +40,8 @@ namespace ColorApp
         private void Form1_Load(object sender, EventArgs e)
         {
             _colorStorage.LoadFromFile("colors.json");
-            UpdateColorThumbnails(); // om du visar färgerna visuellt
+            UpdateColorThumbnails(); // 
+            InitializeToolTips(); // Tooltip
         }
 
         private void UpdateUI()
@@ -91,6 +97,7 @@ namespace ColorApp
 
         private void UpdateColorThumbnails()
         {
+            _colorStorage.LoadFromFile("colors.json");
             flowPanelColors.Controls.Clear();
 
             foreach (var color in _colorStorage.Colors)
@@ -105,11 +112,43 @@ namespace ColorApp
                     Tag = color // spara färgen i Tag för att kunna hämta den vid klick
                 };
 
+                // Kopplar en klick-händelse till panelen för varje sparad färg (dynamiskt skapad kontroll)
                 panel.Click += ColorPanel_Click;
+                toolTipSavedColorsPanel.SetToolTip(panel, $"Klicka på färgen för att kopiera färgkoden till urklipp!");
+
                 flowPanelColors.Controls.Add(panel);
             }
         }
 
+        // Tooltip
+        private void InitializeToolTips()
+        { 
+            ToolTipGeneral.SetToolTip(buttonSaveRGBColor, "Lägg till färgen i paletten");
+            ToolTipGeneral.SetToolTip(buttonSavePastellColor, "Lägg till färgen i paletten");
+            ToolTipGeneral.SetToolTip(buttonSaveGreyColor, "Lägg till färgen i paletten");
+            ToolTipGeneral.SetToolTip(button1, "Generera en ny pastellfärg");
+            ToolTipGeneral.SetToolTip(btnGenerate, "Generera en ny RGB-färg");
+            ToolTipGeneral.SetToolTip(buttonGreyScale, "Generera en ny gråskala");
+            ToolTipGeneral.SetToolTip(trackBarRed, "Justera den röda komponenten");
+            ToolTipGeneral.SetToolTip(trackBarGreen, "Justera den gröna komponenten");
+            ToolTipGeneral.SetToolTip(trackBarBlue, "Justera den blå komponenten");
+
+            ToolTipGeneral.SetToolTip(textBoxRed, "Ange ett värde mellan 0 och 255 för den röda komponenten");
+            ToolTipGeneral.SetToolTip(textBoxGreen, "Ange ett värde mellan 0 och 255 för den gröna komponenten");
+            ToolTipGeneral.SetToolTip(textBoxBlue, "Ange ett värde mellan 0 och 255 för den blå komponenten");
+
+            ToolTipGeneral.SetToolTip(radioBtnGreyscale, "Standard gråskala");
+            ToolTipGeneral.SetToolTip(radioBtnFuzzy, "Alternativ \"fuzzy\" gråskala");
+            ToolTipGeneral.SetToolTip(radioBtnBiasGrey, "Alternativ \"biased\" gråskala");
+
+            ToolTipGeneral.SetToolTip(BtnRed, "Slumpa den röda komponenten");
+            ToolTipGeneral.SetToolTip(BtnGreen, "Slumpa den gröna komponenten");
+            ToolTipGeneral.SetToolTip(BtnBlue, "Slumpa den blå komponenten");
+
+        }
+
+
+        //
 
 
         private void BtnRed_Click_1(object sender, EventArgs e)
@@ -143,10 +182,24 @@ namespace ColorApp
 
         private void buttonGreyScale_Click(object sender, EventArgs e)
         {
-            _greyColor = _greyGenerator.Generate();
+            if (radioBtnGreyscale.Checked)
+            {
+                _greyColor = _greyGenerator.Generate(); // Standard gråskala
+            }
+            else if (radioBtnFuzzy.Checked)
+            {
+                _greyColor = _fuzzyGenerator.Generate(); // Alternativ "fuzzy" gråskala
+            }
+            else if (radioBtnBiasGrey.Checked)
+            {
+                var biasedGenerator = new BiasedGrayScaleGenerator();
+                _greyColor = biasedGenerator.Generate(); // Alternativ "biased" gråskala
+            }
+
             panelGreyscale.BackColor = _greyColor.ToColor();
             labelGreyScale();
         }
+
 
         private void trackBarRed_ValueChanged(object sender, EventArgs e)
         {
@@ -248,6 +301,15 @@ namespace ColorApp
             UpdateColorThumbnails();
         }
 
+        private void buttonSaveGreyColor_Click(object sender, EventArgs e)
+        {
+            _colorStorage.AddColor(_greyColor);
+            _colorStorage.SaveToFile("colors.json");
+            MessageBox.Show($"Färgen {_greyColor} har sparats.");
+            UpdateColorThumbnails();
+
+        }
+
         private void ColorPanel_Click(object sender, EventArgs e)
         {
             if (sender is Panel panel && panel.Tag is ColorModel color)
@@ -255,14 +317,16 @@ namespace ColorApp
                 Clipboard.SetText(color.ToString());
                 MessageBox.Show("Färgkoden är kopierad!", "Kopierat", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        } 
+        }
 
         private void redigeraSparadeFärgerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var editColors = new EditColorsForm();
+            editColors.ColorsUpdated += (s, e) => UpdateColorThumbnails(); // Koppla eventet
             editColors.Show();
-
         }
+
+        
     }
 }
 

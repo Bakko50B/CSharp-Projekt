@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             BtnRed = new Button();
             BtnGreen = new Button();
             BtnBlue = new Button();
@@ -65,11 +67,19 @@
             flowPanelColors = new FlowLayoutPanel();
             buttonSavePastellColor = new Button();
             labelSacedColors = new Label();
+            groupGreyscale = new GroupBox();
+            radioBtnBiasGrey = new RadioButton();
+            radioBtnFuzzy = new RadioButton();
+            radioBtnGreyscale = new RadioButton();
+            buttonSaveGreyColor = new Button();
+            toolTipSavedColorsPanel = new ToolTip(components);
+            ToolTipGeneral = new ToolTip(components);
             panelGruppMedFärgknappar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarBlue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBarGreen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBarRed).BeginInit();
             menuStrip1.SuspendLayout();
+            groupGreyscale.SuspendLayout();
             SuspendLayout();
             // 
             // BtnRed
@@ -305,7 +315,7 @@
             // panelGreyscale
             // 
             panelGreyscale.Anchor = AnchorStyles.Left;
-            panelGreyscale.Location = new Point(721, 601);
+            panelGreyscale.Location = new Point(721, 642);
             panelGreyscale.Name = "panelGreyscale";
             panelGreyscale.Size = new Size(395, 90);
             panelGreyscale.TabIndex = 13;
@@ -314,7 +324,7 @@
             // 
             labelShowGreyscale.Anchor = AnchorStyles.Left;
             labelShowGreyscale.AutoSize = true;
-            labelShowGreyscale.Location = new Point(721, 558);
+            labelShowGreyscale.Location = new Point(721, 599);
             labelShowGreyscale.Margin = new Padding(3, 0, 3, 15);
             labelShowGreyscale.Name = "labelShowGreyscale";
             labelShowGreyscale.Size = new Size(145, 25);
@@ -324,7 +334,7 @@
             // panelPastel
             // 
             panelPastel.Anchor = AnchorStyles.Left;
-            panelPastel.Location = new Point(721, 429);
+            panelPastel.Location = new Point(721, 470);
             panelPastel.Name = "panelPastel";
             panelPastel.Size = new Size(395, 90);
             panelPastel.TabIndex = 5;
@@ -333,7 +343,7 @@
             // 
             labelPastel.Anchor = AnchorStyles.Left;
             labelPastel.AutoSize = true;
-            labelPastel.Location = new Point(721, 386);
+            labelPastel.Location = new Point(721, 427);
             labelPastel.Margin = new Padding(3, 0, 3, 15);
             labelPastel.Name = "labelPastel";
             labelPastel.Size = new Size(112, 25);
@@ -406,10 +416,11 @@
             // 
             // flowPanelColors
             // 
-            flowPanelColors.Location = new Point(12, 751);
+            flowPanelColors.Location = new Point(12, 822);
             flowPanelColors.Name = "flowPanelColors";
-            flowPanelColors.Size = new Size(300, 150);
+            flowPanelColors.Size = new Size(1104, 123);
             flowPanelColors.TabIndex = 20;
+            toolTipSavedColorsPanel.SetToolTip(flowPanelColors, "Klicka på färgen för att kopiera färgkoden till urklipp!");
             // 
             // buttonSavePastellColor
             // 
@@ -425,17 +436,74 @@
             // 
             labelSacedColors.AutoSize = true;
             labelSacedColors.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelSacedColors.Location = new Point(12, 710);
+            labelSacedColors.Location = new Point(12, 781);
             labelSacedColors.Name = "labelSacedColors";
             labelSacedColors.Size = new Size(199, 38);
             labelSacedColors.TabIndex = 21;
             labelSacedColors.Text = "Sparade färger";
             // 
+            // groupGreyscale
+            // 
+            groupGreyscale.Controls.Add(radioBtnBiasGrey);
+            groupGreyscale.Controls.Add(radioBtnFuzzy);
+            groupGreyscale.Controls.Add(radioBtnGreyscale);
+            groupGreyscale.Location = new Point(343, 572);
+            groupGreyscale.Name = "groupGreyscale";
+            groupGreyscale.Size = new Size(300, 160);
+            groupGreyscale.TabIndex = 22;
+            groupGreyscale.TabStop = false;
+            groupGreyscale.Text = "Renderingsalternativ";
+            // 
+            // radioBtnBiasGrey
+            // 
+            radioBtnBiasGrey.AutoSize = true;
+            radioBtnBiasGrey.Location = new Point(15, 119);
+            radioBtnBiasGrey.Name = "radioBtnBiasGrey";
+            radioBtnBiasGrey.Size = new Size(132, 29);
+            radioBtnBiasGrey.TabIndex = 2;
+            radioBtnBiasGrey.TabStop = true;
+            radioBtnBiasGrey.Text = "Färgtonsgrå";
+            radioBtnBiasGrey.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnFuzzy
+            // 
+            radioBtnFuzzy.AutoSize = true;
+            radioBtnFuzzy.Location = new Point(14, 76);
+            radioBtnFuzzy.Name = "radioBtnFuzzy";
+            radioBtnFuzzy.Size = new Size(119, 29);
+            radioBtnFuzzy.TabIndex = 1;
+            radioBtnFuzzy.Text = "Fuzzygrått";
+            radioBtnFuzzy.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnGreyscale
+            // 
+            radioBtnGreyscale.AutoSize = true;
+            radioBtnGreyscale.Checked = true;
+            radioBtnGreyscale.Location = new Point(14, 36);
+            radioBtnGreyscale.Name = "radioBtnGreyscale";
+            radioBtnGreyscale.Size = new Size(108, 29);
+            radioBtnGreyscale.TabIndex = 0;
+            radioBtnGreyscale.TabStop = true;
+            radioBtnGreyscale.Text = "Standard";
+            radioBtnGreyscale.UseVisualStyleBackColor = true;
+            // 
+            // buttonSaveGreyColor
+            // 
+            buttonSaveGreyColor.Location = new Point(12, 698);
+            buttonSaveGreyColor.Name = "buttonSaveGreyColor";
+            buttonSaveGreyColor.Size = new Size(238, 34);
+            buttonSaveGreyColor.TabIndex = 23;
+            buttonSaveGreyColor.Text = "Spara färg";
+            buttonSaveGreyColor.UseVisualStyleBackColor = true;
+            buttonSaveGreyColor.Click += buttonSaveGreyColor_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1139, 913);
+            ClientSize = new Size(1139, 994);
+            Controls.Add(buttonSaveGreyColor);
+            Controls.Add(groupGreyscale);
             Controls.Add(labelSacedColors);
             Controls.Add(buttonSavePastellColor);
             Controls.Add(flowPanelColors);
@@ -451,10 +519,14 @@
             Controls.Add(panelGreyscale);
             Controls.Add(panelGruppMedFärgknappar);
             Controls.Add(menuStrip1);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            MaximizeBox = false;
+            MaximumSize = new Size(1161, 1050);
+            MinimizeBox = false;
+            MinimumSize = new Size(1161, 1050);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Färgkollaren";
             panelGruppMedFärgknappar.ResumeLayout(false);
             panelGruppMedFärgknappar.PerformLayout();
@@ -463,6 +535,8 @@
             ((System.ComponentModel.ISupportInitialize)trackBarRed).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            groupGreyscale.ResumeLayout(false);
+            groupGreyscale.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -506,5 +580,12 @@
         private Label labelSacedColors;
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem redigeraSparadeFärgerToolStripMenuItem;
+        private GroupBox groupGreyscale;
+        private RadioButton radioBtnGreyscale;
+        private RadioButton radioBtnFuzzy;
+        private Button buttonSaveGreyColor;
+        private RadioButton radioBtnBiasGrey;
+        private ToolTip toolTipSavedColorsPanel;
+        private ToolTip ToolTipGeneral;
     }
 }
