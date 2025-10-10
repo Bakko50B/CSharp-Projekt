@@ -62,7 +62,7 @@
 
             // Välj en kanal att bias:a
             int biasChannel = _rnd.Next(0, 3); // 0 = R, 1 = G, 2 = B
-            int biasAmount = _rnd.Next(4, 8); // Bias mellan +10 och +30
+            int biasAmount = _rnd.Next(4, 8); // Bias mellan +4 och +8
 
             int r = baseValue;
             int g = baseValue;
@@ -78,6 +78,8 @@
             return new ColorModel { Red = r, Green = g, Blue = b };
         }
 
+        // Returnerar värdet begränsat till intervallet 0–255
+        // value "krymper ihop" vid behov
         private int Clamp(int value)
         {
             return Math.Max(0, Math.Min(255, value));

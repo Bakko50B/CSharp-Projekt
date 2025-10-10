@@ -1,18 +1,22 @@
 namespace ColorApp
 {
-    public partial class Form1 : Form
-    {
-        private IColorGenerator _generator = new RandomColorGenerator();
-        private IColorGenerator _greyGenerator = new GrayScaleGenerator();
-        private IColorGenerator _fuzzyGenerator = new FuzzyGrayScaleGenerator();
-        private IColorGenerator _pastelGenerator = new PastelColorGenerator();
+        public partial class Form1 : Form
+        {
+            // Färggeneratorer för olika färgtyper
+            private IColorGenerator _generator = new RandomColorGenerator();
+            private IColorGenerator _greyGenerator = new GrayScaleGenerator();
+            private IColorGenerator _fuzzyGenerator = new FuzzyGrayScaleGenerator();
+            private IColorGenerator _pastelGenerator = new PastelColorGenerator();
         
-        private ColorModel _currentColor;
-        private ColorModel _greyColor;
-        private ColorModel _pastelcolor;
-        
-        private ColorStorage _colorStorage;
+            // Färgmodeller för aktuell färg och varianter        
+            private ColorModel _currentColor;
+            private ColorModel _greyColor;
+            private ColorModel _pastelcolor;
 
+            // Färglagring för att hantera sparade färger
+            private ColorStorage _colorStorage;
+
+        // Konstruktor för huvudformuläret. Initierar komponenter och startlogik.
         public Form1()
         {
             InitializeComponent();
@@ -37,6 +41,7 @@ namespace ColorApp
             UpdateUI();
         }
 
+        // Event-handler för formulärets Load-händelse. Utför initialisering innan formuläret visas.
         private void Form1_Load(object sender, EventArgs e)
         {
             _colorStorage.LoadFromFile("colors.json");
@@ -44,6 +49,7 @@ namespace ColorApp
             InitializeToolTips(); // Tooltip
         }
 
+        // Uppdaterar användargränssnittet med aktuell färginformation och kontroller.
         private void UpdateUI()
         {
             UpdatePanelColor();
@@ -55,6 +61,7 @@ namespace ColorApp
             settextBoxRGBValue();
         }
 
+        // Synkroniserar trackbar-kontrollerna med den aktuella färgens RGB-värden.
         private void setTrackbarValue()
         {
             trackBarRed.Value = _currentColor.Red;
@@ -62,6 +69,7 @@ namespace ColorApp
             trackBarBlue.Value = _currentColor.Blue;
         }
 
+        // Synkroniserar textBox-kontrollerna med den aktuella färgens RGB-värden.
         private void settextBoxRGBValue()
         {
             textBoxRed.Text = _currentColor.Red.ToString();
@@ -69,32 +77,37 @@ namespace ColorApp
             textBoxBlue.Text = _currentColor.Blue.ToString();
         }
 
+        // Uppdaterar etiketten med den aktuella färgens RGB-kod.
         private void labelColors()
         {
             labelRGBCode.Text = _currentColor.ToString();
         }
 
+        // Uppdaterar etiketten med den aktuella pastellfärgens RGB-kod.
         private void labelPastelColor()
         {
             labelPastel.Text = _pastelcolor.ToString();
         }
 
-
+        // Uppdaterar etiketten med den aktuella gråskale-färgens RGB-kod.
         private void labelGreyScale()
         {
             labelShowGreyscale.Text = _greyColor.ToString();
         }
 
+        // Uppdaterar färgpanelen med den aktuella färgen.
         private void UpdatePanelColor()
         {
             pnlColor.BackColor = _currentColor.ToColor();
         }
 
+        // Uppdaterar färgpanelen med den aktuella pastellfärgen.
         private void UpdatePanelPastelColor()
         {
             panelPastel.BackColor = _pastelcolor.ToColor();
         }
 
+        // Uppdaterar panelen med miniatyrer av sparade färger.
         private void UpdateColorThumbnails()
         {
             _colorStorage.LoadFromFile("colors.json");
@@ -120,13 +133,13 @@ namespace ColorApp
             }
         }
 
-        // Tooltip
+        // Tooltip för formulärens kontroller
         private void InitializeToolTips()
         { 
             ToolTipGeneral.SetToolTip(buttonSaveRGBColor, "Lägg till färgen i paletten");
             ToolTipGeneral.SetToolTip(buttonSavePastellColor, "Lägg till färgen i paletten");
             ToolTipGeneral.SetToolTip(buttonSaveGreyColor, "Lägg till färgen i paletten");
-            ToolTipGeneral.SetToolTip(button1, "Generera en ny pastellfärg");
+            ToolTipGeneral.SetToolTip(btnGeneratePastel, "Generera en ny pastellfärg");
             ToolTipGeneral.SetToolTip(btnGenerate, "Generera en ny RGB-färg");
             ToolTipGeneral.SetToolTip(buttonGreyScale, "Generera en ny gråskala");
             ToolTipGeneral.SetToolTip(trackBarRed, "Justera den röda komponenten");
@@ -146,40 +159,47 @@ namespace ColorApp
             ToolTipGeneral.SetToolTip(BtnBlue, "Slumpa den blå komponenten");
 
         }
-
-
-        //
-
-
+        // Händelsehanterare för knappar som slumpmässigt ändrar en RGB-komponent
         private void BtnRed_Click_1(object sender, EventArgs e)
         {
-            // Skapa en ny färg med slumpad röd komponent, behåll övriga
+            // Skapa en ny färgkomponent
             var newColor = _generator.Generate();
+            // Sätter den nya färgens röda komponent från den nyskapade färgen
             _currentColor.Red = newColor.Red;
+            // Uppdaterar användargränssnittet
             UpdateUI();
         }
-
+        
         private void BtnGreen_Click_1(object sender, EventArgs e)
         {
+            // Skapa en ny färgkomponent
             var newColor = _generator.Generate();
+            // Sätter den nya färgens gröna komponent från den nyskapade färgen
             _currentColor.Green = newColor.Green;
+            // Uppdaterar användargränssnittet
             UpdateUI();
         }
 
         private void BtnBlue_Click_1(object sender, EventArgs e)
         {
+            // Skapa en ny färgkomponent
             var newColor = _generator.Generate();
+            // Sätter den nya färgens blå komponent från den nyskapade färgen
             _currentColor.Blue = newColor.Blue;
+            // Uppdaterar användargränssnittet
             UpdateUI();
         }
 
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            // Generera en ny slumpmässig RGB-färg
             _currentColor = _generator.Generate();
+            // Uppdatera användargränssnittet
             UpdateUI();
         }
 
+        // Rendera gråskalefärg baserat på vald radioknapp
         private void buttonGreyScale_Click(object sender, EventArgs e)
         {
             if (radioBtnGreyscale.Checked)
@@ -197,28 +217,33 @@ namespace ColorApp
             }
 
             panelGreyscale.BackColor = _greyColor.ToColor();
+            //Uppdatera information i UI
             labelGreyScale();
         }
 
-
+        // Händelsehanterare för trackbars för att uppdatera färgkomponenter
         private void trackBarRed_ValueChanged(object sender, EventArgs e)
         {
+            // Uppdatera den röda komponenten i den aktuella färgen
             _currentColor.Red = trackBarRed.Value;
             UpdateUI();
         }
 
         private void trackBarGreen_ValueChanged(object sender, EventArgs e)
         {
+            // Uppdatera den gröna komponenten i den aktuella färgen    
             _currentColor.Green = trackBarGreen.Value;
             UpdateUI();
         }
 
         private void trackBarBlue_ValueChanged(object sender, EventArgs e)
         {
+            // Uppdatera den blå komponenten i den aktuella färgen
             _currentColor.Blue = trackBarBlue.Value;
             UpdateUI();
         }
 
+        // Händelsehanterare för textBox-kontroller för att uppdatera färgkomponenter med felhantering
         private void textBoxRed_TextChanged(object sender, EventArgs e)
         {
             int min = trackBarRed.Minimum;
@@ -227,6 +252,7 @@ namespace ColorApp
             {
                 if (value < min) value = min;
                 if (value > max) value = max;
+                // Sätter värdet för den röda komponenten i den aktuella färgen
                 _currentColor.Red = value;
                 UpdateUI();
             }
@@ -245,6 +271,7 @@ namespace ColorApp
             {
                 if (value < min) value = min;
                 if (value > max) value = max;
+                // Sätter värdet för den gröna komponenten i den aktuella färgen
                 _currentColor.Green = value;
                 UpdateUI();
             }
@@ -263,6 +290,7 @@ namespace ColorApp
             {
                 if (value < min) value = min;
                 if (value > max) value = max;
+                // Sätter värdet för den blå komponenten i den aktuella färgen
                 _currentColor.Blue = value;
                 UpdateUI();
             }
@@ -273,26 +301,30 @@ namespace ColorApp
             }
         }
 
+        // Händelsehanterare för knapp som genererar ny pastellfärg
         private void button1_Click(object sender, EventArgs e)
         {
+            // Generera en ny pastellfärg
             _pastelcolor = _pastelGenerator.Generate();
             UpdateUI();
         }
 
+        // Händelsehanterare för menyvalet "Avsluta" – stänger applikationen
         private void avslutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        // Händelsehanterare för menyvalet "Redigera sparade färger" – öppnar redigeringsfönstret
         private void buttonSaveRGBColor_Click(object sender, EventArgs e)
         {
             _colorStorage.AddColor(_currentColor);
             _colorStorage.SaveToFile("colors.json");
             MessageBox.Show($"Färgen {_currentColor} har sparats.");
             UpdateColorThumbnails();
-
         }
 
+        // Spara pastellfärg
         private void buttonSavePastellColor_Click(object sender, EventArgs e)
         {
             _colorStorage.AddColor(_pastelcolor);
@@ -301,15 +333,16 @@ namespace ColorApp
             UpdateColorThumbnails();
         }
 
+        //  Spara gråskala
         private void buttonSaveGreyColor_Click(object sender, EventArgs e)
         {
             _colorStorage.AddColor(_greyColor);
             _colorStorage.SaveToFile("colors.json");
             MessageBox.Show($"Färgen {_greyColor} har sparats.");
             UpdateColorThumbnails();
-
         }
 
+        // Klick-händelse för sparade färgpaneler som kopierar färgkoden till urklipp
         private void ColorPanel_Click(object sender, EventArgs e)
         {
             if (sender is Panel panel && panel.Tag is ColorModel color)
@@ -319,14 +352,13 @@ namespace ColorApp
             }
         }
 
+        // Lambda-uttryck som hanterar ColorsUpdated-eventet genom att kalla UpdateColorThumbnails().
         private void redigeraSparadeFärgerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var editColors = new EditColorsForm();
             editColors.ColorsUpdated += (s, e) => UpdateColorThumbnails(); // Koppla eventet
             editColors.Show();
-        }
-
-        
+        }       
     }
 }
 

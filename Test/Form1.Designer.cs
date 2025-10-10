@@ -49,7 +49,7 @@
             trackBarGreen = new TrackBar();
             trackBarRed = new TrackBar();
             label5 = new Label();
-            button1 = new Button();
+            btnGeneratePastel = new Button();
             buttonGreyScale = new Button();
             labelGreyscale = new Label();
             panelGreyscale = new Panel();
@@ -68,6 +68,7 @@
             buttonSavePastellColor = new Button();
             labelSacedColors = new Label();
             groupGreyscale = new GroupBox();
+            radioButton1 = new RadioButton();
             radioBtnBiasGrey = new RadioButton();
             radioBtnFuzzy = new RadioButton();
             radioBtnGreyscale = new RadioButton();
@@ -283,15 +284,15 @@
             label5.TabIndex = 18;
             label5.Text = "Slumpa fram komplett pastellfärg";
             // 
-            // button1
+            // btnGeneratePastel
             // 
-            button1.Location = new Point(12, 443);
-            button1.Name = "button1";
-            button1.Size = new Size(238, 42);
-            button1.TabIndex = 17;
-            button1.Text = "Generera pastellfärg!";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnGeneratePastel.Location = new Point(12, 443);
+            btnGeneratePastel.Name = "btnGeneratePastel";
+            btnGeneratePastel.Size = new Size(238, 42);
+            btnGeneratePastel.TabIndex = 17;
+            btnGeneratePastel.Text = "Generera pastellfärg!";
+            btnGeneratePastel.UseVisualStyleBackColor = true;
+            btnGeneratePastel.Click += button1_Click;
             // 
             // buttonGreyScale
             // 
@@ -390,7 +391,7 @@
             // avslutaToolStripMenuItem
             // 
             avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
-            avslutaToolStripMenuItem.Size = new Size(172, 34);
+            avslutaToolStripMenuItem.Size = new Size(270, 34);
             avslutaToolStripMenuItem.Text = "Avsluta";
             avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
             // 
@@ -444,6 +445,7 @@
             // 
             // groupGreyscale
             // 
+            groupGreyscale.Controls.Add(radioButton1);
             groupGreyscale.Controls.Add(radioBtnBiasGrey);
             groupGreyscale.Controls.Add(radioBtnFuzzy);
             groupGreyscale.Controls.Add(radioBtnGreyscale);
@@ -453,6 +455,17 @@
             groupGreyscale.TabIndex = 22;
             groupGreyscale.TabStop = false;
             groupGreyscale.Text = "Renderingsalternativ";
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(145, 64);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(141, 29);
+            radioButton1.TabIndex = 3;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "radioButton1";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // radioBtnBiasGrey
             // 
@@ -508,7 +521,7 @@
             Controls.Add(buttonSavePastellColor);
             Controls.Add(flowPanelColors);
             Controls.Add(label5);
-            Controls.Add(button1);
+            Controls.Add(btnGeneratePastel);
             Controls.Add(lblGråskalefärger);
             Controls.Add(lblPastellfärger);
             Controls.Add(labelPastel);
@@ -568,7 +581,7 @@
         private Label lblGråskalefärger;
         private Label label3;
         private Label label5;
-        private Button button1;
+        private Button btnGeneratePastel;
         private Label label4;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
@@ -587,5 +600,6 @@
         private RadioButton radioBtnBiasGrey;
         private ToolTip toolTipSavedColorsPanel;
         private ToolTip ToolTipGeneral;
+        private RadioButton radioButton1;
     }
 }
