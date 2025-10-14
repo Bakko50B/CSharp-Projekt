@@ -64,11 +64,11 @@
             editToolStripMenuItem = new ToolStripMenuItem();
             redigeraSparadeFärgerToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
+            omFärgkollarenToolStripMenuItem = new ToolStripMenuItem();
             flowPanelColors = new FlowLayoutPanel();
             buttonSavePastellColor = new Button();
             labelSacedColors = new Label();
             groupGreyscale = new GroupBox();
-            radioButton1 = new RadioButton();
             radioBtnBiasGrey = new RadioButton();
             radioBtnFuzzy = new RadioButton();
             radioBtnGreyscale = new RadioButton();
@@ -122,7 +122,7 @@
             // pnlColor
             // 
             pnlColor.Anchor = AnchorStyles.Left;
-            pnlColor.Location = new Point(721, 104);
+            pnlColor.Location = new Point(721, 100);
             pnlColor.Name = "pnlColor";
             pnlColor.Size = new Size(395, 90);
             pnlColor.TabIndex = 3;
@@ -131,7 +131,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(9, 16);
+            label1.Location = new Point(9, 22);
             label1.Name = "label1";
             label1.Size = new Size(175, 38);
             label1.TabIndex = 4;
@@ -139,7 +139,7 @@
             // 
             // btnGenerate
             // 
-            btnGenerate.Location = new Point(12, 112);
+            btnGenerate.Location = new Point(12, 100);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(238, 42);
             btnGenerate.TabIndex = 5;
@@ -150,7 +150,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 75);
+            label2.Location = new Point(12, 63);
             label2.Name = "label2";
             label2.Size = new Size(268, 25);
             label2.TabIndex = 6;
@@ -160,7 +160,7 @@
             // 
             labelRGBCode.Anchor = AnchorStyles.Left;
             labelRGBCode.AutoSize = true;
-            labelRGBCode.Location = new Point(721, 61);
+            labelRGBCode.Location = new Point(721, 57);
             labelRGBCode.Margin = new Padding(3, 0, 3, 15);
             labelRGBCode.Name = "labelRGBCode";
             labelRGBCode.Size = new Size(112, 25);
@@ -194,7 +194,7 @@
             // 
             // buttonSaveRGBColor
             // 
-            buttonSaveRGBColor.Location = new Point(12, 164);
+            buttonSaveRGBColor.Location = new Point(12, 152);
             buttonSaveRGBColor.Name = "buttonSaveRGBColor";
             buttonSaveRGBColor.Size = new Size(238, 34);
             buttonSaveRGBColor.TabIndex = 17;
@@ -223,7 +223,7 @@
             // 
             // textBoxBlue
             // 
-            textBoxBlue.Location = new Point(592, 237);
+            textBoxBlue.Location = new Point(590, 230);
             textBoxBlue.Name = "textBoxBlue";
             textBoxBlue.Size = new Size(95, 31);
             textBoxBlue.TabIndex = 14;
@@ -231,7 +231,7 @@
             // 
             // textBoxGreen
             // 
-            textBoxGreen.Location = new Point(592, 181);
+            textBoxGreen.Location = new Point(590, 174);
             textBoxGreen.Name = "textBoxGreen";
             textBoxGreen.Size = new Size(95, 31);
             textBoxGreen.TabIndex = 13;
@@ -239,7 +239,7 @@
             // 
             // textBoxRed
             // 
-            textBoxRed.Location = new Point(592, 119);
+            textBoxRed.Location = new Point(590, 112);
             textBoxRed.Name = "textBoxRed";
             textBoxRed.Size = new Size(95, 31);
             textBoxRed.TabIndex = 12;
@@ -248,7 +248,7 @@
             // trackBarBlue
             // 
             trackBarBlue.BackColor = Color.Blue;
-            trackBarBlue.Location = new Point(371, 218);
+            trackBarBlue.Location = new Point(369, 211);
             trackBarBlue.Maximum = 255;
             trackBarBlue.Name = "trackBarBlue";
             trackBarBlue.Size = new Size(215, 69);
@@ -258,7 +258,7 @@
             // trackBarGreen
             // 
             trackBarGreen.BackColor = Color.Green;
-            trackBarGreen.Location = new Point(371, 164);
+            trackBarGreen.Location = new Point(369, 157);
             trackBarGreen.Maximum = 255;
             trackBarGreen.Name = "trackBarGreen";
             trackBarGreen.Size = new Size(215, 69);
@@ -268,7 +268,7 @@
             // trackBarRed
             // 
             trackBarRed.BackColor = Color.Red;
-            trackBarRed.Location = new Point(371, 107);
+            trackBarRed.Location = new Point(369, 100);
             trackBarRed.Maximum = 255;
             trackBarRed.Name = "trackBarRed";
             trackBarRed.Size = new Size(215, 69);
@@ -296,7 +296,7 @@
             // 
             // buttonGreyScale
             // 
-            buttonGreyScale.Location = new Point(12, 648);
+            buttonGreyScale.Location = new Point(12, 624);
             buttonGreyScale.Name = "buttonGreyScale";
             buttonGreyScale.Size = new Size(238, 42);
             buttonGreyScale.TabIndex = 8;
@@ -307,7 +307,7 @@
             // labelGreyscale
             // 
             labelGreyscale.AutoSize = true;
-            labelGreyscale.Location = new Point(12, 620);
+            labelGreyscale.Location = new Point(12, 596);
             labelGreyscale.Name = "labelGreyscale";
             labelGreyscale.Size = new Size(200, 25);
             labelGreyscale.TabIndex = 7;
@@ -316,16 +316,16 @@
             // panelGreyscale
             // 
             panelGreyscale.Anchor = AnchorStyles.Left;
-            panelGreyscale.Location = new Point(721, 642);
+            panelGreyscale.Location = new Point(721, 632);
             panelGreyscale.Name = "panelGreyscale";
-            panelGreyscale.Size = new Size(395, 90);
+            panelGreyscale.Size = new Size(395, 89);
             panelGreyscale.TabIndex = 13;
             // 
             // labelShowGreyscale
             // 
             labelShowGreyscale.Anchor = AnchorStyles.Left;
             labelShowGreyscale.AutoSize = true;
-            labelShowGreyscale.Location = new Point(721, 599);
+            labelShowGreyscale.Location = new Point(721, 589);
             labelShowGreyscale.Margin = new Padding(3, 0, 3, 15);
             labelShowGreyscale.Name = "labelShowGreyscale";
             labelShowGreyscale.Size = new Size(145, 25);
@@ -335,7 +335,7 @@
             // panelPastel
             // 
             panelPastel.Anchor = AnchorStyles.Left;
-            panelPastel.Location = new Point(721, 470);
+            panelPastel.Location = new Point(732, 443);
             panelPastel.Name = "panelPastel";
             panelPastel.Size = new Size(395, 90);
             panelPastel.TabIndex = 5;
@@ -344,7 +344,7 @@
             // 
             labelPastel.Anchor = AnchorStyles.Left;
             labelPastel.AutoSize = true;
-            labelPastel.Location = new Point(721, 427);
+            labelPastel.Location = new Point(732, 400);
             labelPastel.Margin = new Padding(3, 0, 3, 15);
             labelPastel.Name = "labelPastel";
             labelPastel.Size = new Size(112, 25);
@@ -365,7 +365,7 @@
             // 
             lblGråskalefärger.AutoSize = true;
             lblGråskalefärger.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblGråskalefärger.Location = new Point(12, 572);
+            lblGråskalefärger.Location = new Point(12, 547);
             lblGråskalefärger.Name = "lblGråskalefärger";
             lblGråskalefärger.Size = new Size(171, 38);
             lblGråskalefärger.TabIndex = 18;
@@ -391,7 +391,7 @@
             // avslutaToolStripMenuItem
             // 
             avslutaToolStripMenuItem.Name = "avslutaToolStripMenuItem";
-            avslutaToolStripMenuItem.Size = new Size(270, 34);
+            avslutaToolStripMenuItem.Size = new Size(172, 34);
             avslutaToolStripMenuItem.Text = "Avsluta";
             avslutaToolStripMenuItem.Click += avslutaToolStripMenuItem_Click;
             // 
@@ -411,9 +411,17 @@
             // 
             // helpToolStripMenuItem
             // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { omFärgkollarenToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new Size(65, 29);
-            helpToolStripMenuItem.Text = "Help";
+            helpToolStripMenuItem.Size = new Size(58, 29);
+            helpToolStripMenuItem.Text = "Om";
+            // 
+            // omFärgkollarenToolStripMenuItem
+            // 
+            omFärgkollarenToolStripMenuItem.Name = "omFärgkollarenToolStripMenuItem";
+            omFärgkollarenToolStripMenuItem.Size = new Size(243, 34);
+            omFärgkollarenToolStripMenuItem.Text = "Om färgkollaren";
+            omFärgkollarenToolStripMenuItem.Click += omFärgkollarenToolStripMenuItem_Click;
             // 
             // flowPanelColors
             // 
@@ -445,27 +453,15 @@
             // 
             // groupGreyscale
             // 
-            groupGreyscale.Controls.Add(radioButton1);
             groupGreyscale.Controls.Add(radioBtnBiasGrey);
             groupGreyscale.Controls.Add(radioBtnFuzzy);
             groupGreyscale.Controls.Add(radioBtnGreyscale);
-            groupGreyscale.Location = new Point(343, 572);
+            groupGreyscale.Location = new Point(343, 596);
             groupGreyscale.Name = "groupGreyscale";
             groupGreyscale.Size = new Size(300, 160);
             groupGreyscale.TabIndex = 22;
             groupGreyscale.TabStop = false;
             groupGreyscale.Text = "Renderingsalternativ";
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(145, 64);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(141, 29);
-            radioButton1.TabIndex = 3;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "radioButton1";
-            radioButton1.UseVisualStyleBackColor = true;
             // 
             // radioBtnBiasGrey
             // 
@@ -502,7 +498,7 @@
             // 
             // buttonSaveGreyColor
             // 
-            buttonSaveGreyColor.Location = new Point(12, 698);
+            buttonSaveGreyColor.Location = new Point(12, 674);
             buttonSaveGreyColor.Name = "buttonSaveGreyColor";
             buttonSaveGreyColor.Size = new Size(238, 34);
             buttonSaveGreyColor.TabIndex = 23;
@@ -600,6 +596,6 @@
         private RadioButton radioBtnBiasGrey;
         private ToolTip toolTipSavedColorsPanel;
         private ToolTip ToolTipGeneral;
-        private RadioButton radioButton1;
+        private ToolStripMenuItem omFärgkollarenToolStripMenuItem;
     }
 }

@@ -1,13 +1,25 @@
 ﻿namespace ColorApp
 {
+    /// <summary>
+    /// Interface för färggeneratorer som returnerar en ColorModel.
+    /// </summary>
     public interface IColorGenerator
     {
+        /// <summary>
+        /// Genererar en färg enligt en viss logik.
+        /// </summary>
+        /// <returns>En instans av ColorModel.</returns>
         ColorModel Generate();
     }
 
+    /// <summary>
+    /// Genererar helt slumpmässiga RGB-värden.
+    /// </summary>
     public class RandomColorGenerator : IColorGenerator
     {
         private Random _rnd = new Random();
+        
+        /// <inheritdoc />
         public ColorModel Generate()
         {
             return new ColorModel
@@ -19,9 +31,14 @@
         }
     }
 
+    /// <summary>
+    /// Genererar gråtoner med samma värde för R, G och B.
+    /// </summary>
     public class GrayScaleGenerator : IColorGenerator
     {
         private Random _rnd = new Random();
+
+        /// <inheritdoc />
         public ColorModel Generate()
         {
             int value = _rnd.Next(0, 256);
@@ -30,10 +47,14 @@
     }
 
 
+    /// <summary>
+    /// Genererar gråtoner med små variationer mellan färgkanalerna.
+    /// </summary>
     public class FuzzyGrayScaleGenerator : IColorGenerator
     {
         private Random _rnd = new Random();
 
+        /// <inheritdoc />
         public ColorModel Generate()
         {
             int baseValue = _rnd.Next(0, 256);
@@ -45,17 +66,24 @@
 
             return new ColorModel { Red = r, Green = g, Blue = b };
         }
-
+        
+        /// <summary>
+        /// Begränsar värdet till intervallet 0–255.
+        /// </summary>
         private int Clamp(int value)
         {
             return Math.Max(0, Math.Min(255, value));
         }
     }
 
+    /// <summary>
+    /// Genererar gråtoner med bias på en slumpmässigt vald färgkanal.
+    /// </summary>
     public class BiasedGrayScaleGenerator : IColorGenerator
     {
         private Random _rnd = new Random();
 
+        /// <inheritdoc />
         public ColorModel Generate()
         {
             int baseValue = _rnd.Next(0, 256);
@@ -78,18 +106,23 @@
             return new ColorModel { Red = r, Green = g, Blue = b };
         }
 
-        // Returnerar värdet begränsat till intervallet 0–255
-        // value "krymper ihop" vid behov
+        /// <summary>
+        /// Begränsar värdet till intervallet 0–255.
+        /// </summary>
         private int Clamp(int value)
         {
             return Math.Max(0, Math.Min(255, value));
         }
     }
 
+    /// <summary>
+    /// Genererar pastellfärger baserat på HSL-modellen.
+    /// </summary>
     public class PastelColorGenerator : IColorGenerator
     {
         private Random _rnd = new Random();
 
+        /// <inheritdoc />
         public ColorModel Generate()
         {
             float hue = _rnd.Next(360);      // valfri färgton
@@ -99,6 +132,9 @@
             return FromHSL(hue, saturation, lightness);
         }
 
+        /// <summary>
+        /// Konverterar HSL-värden till en ColorModel.
+        /// </summary>
         private ColorModel FromHSL(float h, float s, float l)
         {
             float c = (1 - Math.Abs(2 * l - 1)) * s;
@@ -114,6 +150,7 @@
             else if (h < 300) { r = x; b = c; }
             else { r = c; b = x; }
 
+            // Returnerar en ny ColorModel baserat på HSL-konvertering
             return new ColorModel
             {
                 Red = (int)((r + m) * 255),
@@ -122,6 +159,4 @@
             };
         }
     }
-  
-
 }
