@@ -16,7 +16,7 @@ namespace ColorApp
 
         /// <summary>
         /// Lägger till en färg i listan.
-        /// </summary>
+        /// </summary>  
         /// <param name="color">Färgen som ska läggas till.</param>
         public void AddColor(ColorModel color)
         {

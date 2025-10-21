@@ -63,6 +63,7 @@
             avslutaToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             redigeraSparadeFärgerToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItemHexCode = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             omFärgkollarenToolStripMenuItem = new ToolStripMenuItem();
             flowPanelColors = new FlowLayoutPanel();
@@ -316,7 +317,7 @@
             // panelGreyscale
             // 
             panelGreyscale.Anchor = AnchorStyles.Left;
-            panelGreyscale.Location = new Point(721, 632);
+            panelGreyscale.Location = new Point(720, 632);
             panelGreyscale.Name = "panelGreyscale";
             panelGreyscale.Size = new Size(395, 89);
             panelGreyscale.TabIndex = 13;
@@ -325,7 +326,7 @@
             // 
             labelShowGreyscale.Anchor = AnchorStyles.Left;
             labelShowGreyscale.AutoSize = true;
-            labelShowGreyscale.Location = new Point(721, 589);
+            labelShowGreyscale.Location = new Point(720, 589);
             labelShowGreyscale.Margin = new Padding(3, 0, 3, 15);
             labelShowGreyscale.Name = "labelShowGreyscale";
             labelShowGreyscale.Size = new Size(145, 25);
@@ -335,7 +336,7 @@
             // panelPastel
             // 
             panelPastel.Anchor = AnchorStyles.Left;
-            panelPastel.Location = new Point(732, 443);
+            panelPastel.Location = new Point(718, 446);
             panelPastel.Name = "panelPastel";
             panelPastel.Size = new Size(395, 90);
             panelPastel.TabIndex = 5;
@@ -344,7 +345,7 @@
             // 
             labelPastel.Anchor = AnchorStyles.Left;
             labelPastel.AutoSize = true;
-            labelPastel.Location = new Point(732, 400);
+            labelPastel.Location = new Point(718, 403);
             labelPastel.Margin = new Padding(3, 0, 3, 15);
             labelPastel.Name = "labelPastel";
             labelPastel.Size = new Size(112, 25);
@@ -397,7 +398,7 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redigeraSparadeFärgerToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { redigeraSparadeFärgerToolStripMenuItem, ToolStripMenuItemHexCode });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(58, 29);
             editToolStripMenuItem.Text = "Edit";
@@ -408,6 +409,14 @@
             redigeraSparadeFärgerToolStripMenuItem.Size = new Size(303, 34);
             redigeraSparadeFärgerToolStripMenuItem.Text = "Redigera sparade färger";
             redigeraSparadeFärgerToolStripMenuItem.Click += redigeraSparadeFärgerToolStripMenuItem_Click;
+            // 
+            // ToolStripMenuItemHexCode
+            // 
+            ToolStripMenuItemHexCode.CheckOnClick = true;
+            ToolStripMenuItemHexCode.Name = "ToolStripMenuItemHexCode";
+            ToolStripMenuItemHexCode.Size = new Size(303, 34);
+            ToolStripMenuItemHexCode.Text = "Visa färgkod i hexkod";
+            ToolStripMenuItemHexCode.CheckedChanged += ToolStripMenuItemHexCode_CheckedChanged;
             // 
             // helpToolStripMenuItem
             // 
@@ -597,5 +606,6 @@
         private ToolTip toolTipSavedColorsPanel;
         private ToolTip ToolTipGeneral;
         private ToolStripMenuItem omFärgkollarenToolStripMenuItem;
+        private ToolStripMenuItem ToolStripMenuItemHexCode;
     }
 }

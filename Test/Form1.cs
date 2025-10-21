@@ -48,7 +48,7 @@ namespace ColorApp
 
             // Uppdaterar etiketter och UI
             labelColors();
-            labelGreyScale();   
+            labelGreyScale();
             labelPastelColor();
             UpdateUI();
         }
@@ -61,12 +61,12 @@ namespace ColorApp
         {
             // Läser in färger från JSON-fil om den finns
             _colorStorage.LoadFromFile("colors.json");
-            
+
             // Uppdaterar färgminiatyrer i gränssnittet
-            UpdateColorThumbnails(); 
-                                     
+            UpdateColorThumbnails();
+
             // Initierar verktygstips för UI-komponenter
-            InitializeToolTips(); 
+            InitializeToolTips();
         }
 
         /// <summary>
@@ -105,11 +105,34 @@ namespace ColorApp
         }
 
         /// <summary>
+        /// Uppdaterar texten i den angivna etiketten så att färgen visas antingen i hexadecimal form eller som en strängrepresentation.
+        /// </summary>
+        /// <remarks>
+        /// Formatet för den visade färgen bestäms av statusen för <see cref="ToolStripMenuItemHexCode"/>-kryssrutan.
+        /// Om kryssrutan är markerad visas färgen i hexadecimal form; annars används färgens standardsträngrepresentation.
+        /// </remarks>
+        /// <param name="etikett">Den <see cref="Label"/>-kontroll vars text ska uppdateras.</param>
+        /// <param name="färg">Den <see cref="ColorModel"/> som representerar färgen som ska visas.</param>
+        private void UpdateColorLabel(Label etikett, ColorModel färg)
+        {
+            etikett.Text = ToolStripMenuItemHexCode.Checked ? färg.ToHex() : färg.ToString();
+        }
+
+        /// <summary>
         /// Uppdaterar etiketten med den aktuella färgens RGB-kod som sträng.
         /// </summary>
         private void labelColors()
         {
-            labelRGBCode.Text = _currentColor.ToString();
+            UpdateColorLabel(labelRGBCode, _currentColor);
+
+            //if (ToolStripMenuItemHexCode.Checked)
+            //{
+            //    labelRGBCode.Text = _currentColor.ToHex();
+            //}
+            //else
+            //{
+            //    labelRGBCode.Text = _currentColor.ToString();
+            //}
         }
 
         ///<summary>
@@ -117,7 +140,15 @@ namespace ColorApp
         ///</summary>
         private void labelPastelColor()
         {
-            labelPastel.Text = _pastelcolor.ToString();
+            UpdateColorLabel(labelPastel, _pastelcolor);
+            //if (ToolStripMenuItemHexCode.Checked)
+            //{
+            //    labelPastel.Text = _pastelcolor.ToHex();
+            //}
+            //else
+            //{
+            //    labelPastel.Text = _pastelcolor.ToString(); // eller annan representation
+            //}
         }
 
         ///<summary>
@@ -125,7 +156,15 @@ namespace ColorApp
         ///</summary>
         private void labelGreyScale()
         {
-            labelShowGreyscale.Text = _greyColor.ToString();
+            UpdateColorLabel(labelShowGreyscale, _greyColor);
+            //if (ToolStripMenuItemHexCode.Checked)
+            //{
+            //    labelShowGreyscale.Text = _greyColor.ToHex();
+            //}
+            //else
+            //{
+            //    labelShowGreyscale.Text = _greyColor.ToString();
+            //}
         }
 
         ///<summary>
@@ -172,7 +211,7 @@ namespace ColorApp
 
                 // Kopplar en klick-händelse till panelen för varje sparad färg (dynamiskt skapad kontroll)
                 panel.Click += ColorPanel_Click!; // Ta bort varning för null-referens
-                
+
                 // Lägger till tooltip för användarinteraktion
                 toolTipSavedColorsPanel.SetToolTip(panel, $"Klicka på färgen för att kopiera färgkoden till urklipp!");
 
@@ -180,7 +219,7 @@ namespace ColorApp
                 flowPanelColors.Controls.Add(panel);
             }
         }
-        
+
         /// <summary>
         /// Initierar verktygstips för UI-komponenter för att förbättra användarupplevelsen.
         /// Verktygstipsen förklarar funktioner och guidar användaren i gränssnittet.
@@ -496,9 +535,9 @@ namespace ColorApp
             if (sender is Panel panel && panel.Tag is ColorModel color)
             {
                 // Hämtar färgkoden från ToString-metoden i ColorModel och sparar den i urklipp
-                Clipboard.SetText(color.ToString());  
+                Clipboard.SetText(color.ToString());
                 // Meddelar användaren att färgkoden är kopierad
-                MessageBox.Show("Färgkoden är kopierad!", "Kopierat", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                MessageBox.Show("Färgkoden är kopierad!", "Kopierat", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -514,7 +553,7 @@ namespace ColorApp
             var editColors = new EditColorsForm();
             // Lambda-uttryck som hanterar ColorsUpdated-eventet genom att kalla UpdateColorThumbnails().
             // Kopplar ColorsUpdated-eventet till metoden som uppdaterar miniatyrerna
-            editColors.ColorsUpdated += (s, e) => UpdateColorThumbnails(); 
+            editColors.ColorsUpdated += (s, e) => UpdateColorThumbnails();
             // Visar redigeringsfönstret
             editColors.Show();
         }
@@ -527,7 +566,28 @@ namespace ColorApp
         /// <param name="e">Eventdata för klickhändelsen.</param>
         private void omFärgkollarenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("En applikation gjord hösten 2025 i kursen Datateknik GR (A), Programmering i C#.NET DT071G D2401 \nAv Torbjörn Lundberg");
+            MessageBox.Show("En applikation gjord hösten 2025 i kursen:\nDatateknik GR (A), Programmering i C#.NET DT071G D2401 \nAv Torbjörn Lundberg");
+        }
+
+        /// <summary>
+        /// Uppdaterar alla färgetiketter i användargränssnittet.
+        /// </summary>
+        /// <remarks>Etiketterna uppdateras för att visa antingen den hexadecimala representationen 
+        /// eller strängrepresentationen i form av RGB-kod av färgerna, beroende på tillståndet för <see cref="ToolStripMenuItemHexCode"/>
+        /// checkbox.</remarks>
+        private void UpdateAllColorLabels()
+        {
+            bool visaHex = ToolStripMenuItemHexCode.Checked;
+
+            labelPastel.Text = visaHex ? _pastelcolor.ToHex() : _pastelcolor.ToString();
+            labelRGBCode.Text = visaHex ? _currentColor.ToHex() : _currentColor.ToString();
+            labelShowGreyscale.Text = visaHex ? _greyColor.ToHex() : _greyColor.ToString();
+
+        }
+
+        private void ToolStripMenuItemHexCode_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAllColorLabels();
         }
     }
 }

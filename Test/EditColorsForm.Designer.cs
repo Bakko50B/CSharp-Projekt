@@ -73,7 +73,7 @@
             Controls.Add(btnDeleteSelected);
             Controls.Add(flowPanelColorList);
             Name = "EditColorsForm";
-            Text = "EditColorsForm";
+            Text = "Redigera färger";
             ResumeLayout(false);
         }
 
