@@ -115,6 +115,7 @@ namespace ColorApp
         /// <param name="färg">Den <see cref="ColorModel"/> som representerar färgen som ska visas.</param>
         private void UpdateColorLabel(Label etikett, ColorModel färg)
         {
+            // Använder kryssrutans status för att bestämma visningsformat
             etikett.Text = ToolStripMenuItemHexCode.Checked ? färg.ToHex() : färg.ToString();
         }
 
@@ -123,6 +124,7 @@ namespace ColorApp
         /// </summary>
         private void labelColors()
         {
+            // Använder den gemensamma metoden för att uppdatera etiketten
             UpdateColorLabel(labelRGBCode, _currentColor);
 
             //if (ToolStripMenuItemHexCode.Checked)
@@ -141,6 +143,7 @@ namespace ColorApp
         ///</summary>
         private void labelPastelColor()
         {
+            // Använder den gemensamma metoden för att uppdatera etiketten
             UpdateColorLabel(labelPastel, _pastelcolor);
             //if (ToolStripMenuItemHexCode.Checked)
             //{
@@ -157,6 +160,7 @@ namespace ColorApp
         ///</summary>
         private void labelGreyScale()
         {
+            // Använder den gemensamma metoden för att uppdatera etiketten
             UpdateColorLabel(labelShowGreyscale, _greyColor);
             //if (ToolStripMenuItemHexCode.Checked)
             //{
@@ -528,18 +532,17 @@ namespace ColorApp
         /// <summary>
         /// Hanterar klickhändelser på sparade miniatyrer av färger
         /// Genererar en kopiering av färgkoden till urklipp
+        /// Formatet på färgkoden (hexadecimal eller RGB-sträng) styrs av menyvalet.
         /// </summary>
         /// <param name="sender">Den kontroll som utlöste händelsen.</param>
         /// <param name="e">Eventdata för klickhändelsen.</param>
         private void ColorPanel_Click(object sender, EventArgs e)
         {
-            if (sender is Panel panel && panel.Tag is ColorModel color)
-            {
-                // Hämtar färgkoden från ToString-metoden i ColorModel och sparar den i urklipp
-                Clipboard.SetText(color.ToString());
-                // Meddelar användaren att färgkoden är kopierad
+            if (sender is Panel panel && panel.Tag is ColorModel color) { 
+                string kod = ToolStripMenuItemHexCode.Checked ? color.ToHex() : color.ToString();
+                Clipboard.SetText(kod);
                 MessageBox.Show("Färgkoden är kopierad!", "Kopierat", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                }
         }
 
         // <summary>
