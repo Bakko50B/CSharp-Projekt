@@ -589,6 +589,11 @@ namespace ColorApp
 
         }
 
+        /// <summary>
+        /// Händelsehanterare för CheckedChanged för Visa färgkod i hexkod menyn.
+        /// </summary>
+        /// <param name="sender">Den kontroll som utlöste eventet, menyvalet i detta fall.</param>
+        /// <param name="e">An <see cref="EventArgs"/> Eventdata för händelsen.</param>
         private void ToolStripMenuItemHexCode_CheckedChanged(object sender, EventArgs e)
         {
             UpdateAllColorLabels();
