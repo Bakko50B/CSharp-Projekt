@@ -133,6 +133,7 @@ namespace ColorApp
             //{
             //    labelRGBCode.Text = _currentColor.ToString();
             //}
+
         }
 
         ///<summary>
