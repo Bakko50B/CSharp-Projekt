@@ -67,6 +67,9 @@ namespace ColorApp
 
             // Initierar verktygstips för UI-komponenter
             InitializeToolTips();
+
+            //läser in sparad data från settingsfilen om typ av färgkod för ettiketterna (labels)
+            ToolStripMenuItemHexCode.Checked = Properties.Settings.Default.VisaHexKod;
         }
 
         /// <summary>
@@ -596,7 +599,12 @@ namespace ColorApp
         /// <param name="e">An <see cref="EventArgs"/> Eventdata för händelsen.</param>
         private void ToolStripMenuItemHexCode_CheckedChanged(object sender, EventArgs e)
         {
+            // Uppdaterar alla färgetiketter baserat på det nya tillståndet för kryssrutan
             UpdateAllColorLabels();
+            // Sparar inställningen i applikationens inställningar
+            Properties.Settings.Default.VisaHexKod = ToolStripMenuItemHexCode.Checked;
+            // Sparar inställningen i användarens konfigurationsfil
+            Properties.Settings.Default.Save();
         }
     }
 }
