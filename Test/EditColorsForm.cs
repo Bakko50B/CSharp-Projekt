@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ColorApp.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -49,6 +50,7 @@ namespace ColorApp
         /// Metoden rensar den befintliga listan med färgpaneler och bygger upp den på nytt
         /// med färgerna som laddas från <see cref="FilePath"/>. Varje färg visas som en panel
         /// med en färgruta och en kryssruta som visar RGB-värdena.
+        /// Vald värg kan raderas via en knapp
         /// </remarks>
         private void LoadColors()
         {
@@ -77,9 +79,9 @@ namespace ColorApp
                 };
                 //  Kryssruta för att välja bort färgen
                 var checkBox = new CheckBox
-                {
-                    //Text = "RGB " + color.ToString(), // t.ex. RGB(123, 45, 67)
-                    Text = $"RGB ({color.Red}, {color.Green}, {color.Blue})",
+                {                    
+                    //Väljer färgvisningskod utefter sparade valet som hömtas från settings
+                    Text = Settings.Default.VisaHexKod ? color.ToHex() : color.ToString(),
                     AutoSize = true,
                     Dock = DockStyle.Left,
                     TextAlign = ContentAlignment.MiddleLeft,
