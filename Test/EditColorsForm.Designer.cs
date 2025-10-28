@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditColorsForm));
             flowPanelColorList = new FlowLayoutPanel();
             btnDeleteSelected = new Button();
             btnClose = new Button();
@@ -72,6 +73,7 @@
             Controls.Add(btnClose);
             Controls.Add(btnDeleteSelected);
             Controls.Add(flowPanelColorList);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "EditColorsForm";
             Text = "Redigera färger";
             ResumeLayout(false);
