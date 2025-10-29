@@ -80,7 +80,7 @@ namespace ColorApp
                 //  Kryssruta för att välja bort färgen
                 var checkBox = new CheckBox
                 {                    
-                    //Väljer färgvisningskod utefter sparade valet som hömtas från settings
+                    //Väljer färgvisningskod utefter sparade valet som hämtas från settings
                     Text = Settings.Default.VisaHexKod ? color.ToHex() : color.ToString(),
                     AutoSize = true,
                     Dock = DockStyle.Left,
