@@ -57,6 +57,7 @@ namespace ColorApp
             _colorStorage.LoadFromFile(FilePath);   // laddar färger från fil
             flowPanelColorList.Controls.Clear();    // Rensa befintliga kontroller
 
+            // Upprepar detta för alla sparade färger i colors.json
             foreach (var color in _colorStorage.Colors)
             {
                 // Skapa en containerpanel där två andra paneler ska placeras 
@@ -118,7 +119,7 @@ namespace ColorApp
             // Ta bort markerade färger från samlingen
             foreach (var color in toDelete)
             {
-                _colorStorage.Colors.Remove(color);
+                _colorStorage.Colors.Remove(color);  // Ta bort den/dela valda färger(na)
             }
 
             _colorStorage.SaveToFile(FilePath); // Spara uppdaterad samling till fil
